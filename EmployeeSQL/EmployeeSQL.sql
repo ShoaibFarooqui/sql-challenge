@@ -8,7 +8,7 @@ DROP TABLE titles;
 
 CREATE TABLE employees(
 	emp_no INT NOT NULL PRIMARY KEY,
-	emp_title_id VARCHAR,
+	emp_title_id VARCHAR UNIQUE,
 	birth_date VARCHAR,
 	first_name VARCHAR NOT NULL,
 	last_name VARCHAR NOT NULL,
