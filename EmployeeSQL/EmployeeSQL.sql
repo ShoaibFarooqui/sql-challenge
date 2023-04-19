@@ -1,19 +1,27 @@
 -- DROP TABLE IF EXISTS
-DROP TABLE departments;
-DROP TABLE dept_emp;
-DROP TABLE dept_manager;
-DROP TABLE employees;
-DROP TABLE salaries;
-DROP TABLE titles;
+DROP TABLE departments cascade;
+DROP TABLE dept_emp cascade;
+DROP TABLE dept_manager cascade;
+DROP TABLE employees cascade;
+DROP TABLE salaries cascade;
+DROP TABLE titles cascade;
+
+CREATE TABLE titles(
+	title_id VARCHAR NOT NULL PRIMARY KEY,
+	title VARCHAR
+);
+
+select * from titles;
 
 CREATE TABLE employees(
 	emp_no INT NOT NULL PRIMARY KEY,
-	emp_title_id VARCHAR UNIQUE,
+	emp_title_id VARCHAR NOT NULL,
 	birth_date VARCHAR,
-	first_name VARCHAR NOT NULL,
-	last_name VARCHAR NOT NULL,
+	first_name VARCHAR,
+	last_name VARCHAR,
 	sex VARCHAR,
-	hire_date VARCHAR
+	hire_date VARCHAR,
+	FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
 );
 
 select * from employees;
@@ -51,17 +59,15 @@ select * from dept_manager;
 
 
 CREATE TABLE salaries(
-	emp_no INT NOT NULL,
-	salary INT PRIMARY KEY,
+	emp_no INT NOT NULL PRIMARY KEY,
+	salary INT,
 	FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
 
 select * from salaries;
 
-CREATE TABLE titles(
-	title_id VARCHAR NOT NULL,
-	title VARCHAR PRIMARY KEY,
-	FOREIGN KEY (title_id) REFERENCES employees(emp_title_id)
-);
 
-select * from titles;
+
+
+-- IMport Data
+-- COPY employees from 'C:\Users\Shoaib\git\sql-challenge\EmployeeSQL\m9-starter-code\data\employees.csv' delimiter ',' HEADER csv
