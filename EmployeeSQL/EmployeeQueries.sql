@@ -53,7 +53,7 @@ and LEFT(last_name, 1) = 'B';
 
 -- List each employee in the Sales department, including their employee number, last name, and first name.
 
-select departments.dept_no,
+select departments.dept_name,
 	dept_emp.emp_no,
 	employees.last_name,
 	employees.first_name
@@ -63,3 +63,16 @@ departments.dept_no = dept_emp.dept_no
 inner join employees on
 dept_emp.emp_no = employees.emp_no
 where departments.dept_name = 'Sales';
+
+-- List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name.
+select departments.dept_name,
+	dept_emp.emp_no,
+	employees.last_name,
+	employees.first_name
+from departments
+inner join dept_emp on
+departments.dept_no = dept_emp.dept_no
+inner join employees on
+dept_emp.emp_no = employees.emp_no
+where departments.dept_name = 'Sales'
+or departments.dept_name = 'Development';
